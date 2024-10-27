@@ -8,137 +8,137 @@
 	order_index: 1
 	quest_links: [ ]
 	quests: [
-		{
+	{
 			description: [
-				"格雷科技中的能量系统远不如其他科技模组的能量系统那么简单."
-				"格雷科技的能量单位是EU，区别与其他模组使用的FE。"
-				"EU机制与现实世界的电力并不相似。"
-				"功率 = 电压x电流"
-				"能量 =功率x时间"
-				"电阻在格雷科技中是一个被排除的概念，而是部分模拟为电缆损耗。"
-				"格雷科技的定义如下:"
-				"- EU是能量的单位."
-				"- EU/t是功率."
-				"- A(安培)是电流."
-				"- V(伏)是电压，游戏中称为LV, MV, HV...因为这些是游戏玩法相关的值(技术上:LV = 32V = 32EU/t/A)。"
-			]
-			icon: "gtceu:lv_battery_buffer_4x"
-			id: "7F97BED1B9552E5E"
-			tasks: [{
-				id: "7B797503EA800D59"
-				title: "基本设定"
-				type: "checkmark"
-			}]
-			x: -3.0d
-			y: -2.5d
-		}
-		{
-			dependency_requirement: "one_completed"
-			description: [
-				"在格雷科技中，电以\"数据包 \"形式传输.每个数据包的规模相当于其电压等级."
-				"以LV数据包为例,这个\"数据包 \"将携带32EU，多个方块能够产生这些EU数据包，并且只有在能够访问目的地时才会产生数据包。"
-				"每刻(1/20秒),EU\"包\"试图从能量生产者转移到消费者。"
-				"这些\"包\"有两个参数:由生产者等级决定的电压等级(V)，以及电流(A)，这决定了实际可以传输多少功率。"
-				"只有当完整的安培\"包\"可以被接收时,能量才会被转移.你可能会注意到你的机器正好低于满EU容量 - 它们只有在缺少至少1A的输入电压时才会接受EU。"
-				""
-				"如果一个机器接收到一个高于其电压等级的电压,它将爆炸，但任何多余的电流不会有不利影响，因为机器只按需消耗."
-				""
-				"机器爆炸通常也会破坏地形,但在本包中禁用了该功能。"
-				""
-				"总之,能量以\"包\"的形式传输,对于LV是32EU,对于MV是128EU...以此类推，由于电缆损耗，机器实际接收的能量可能会低于发送的能量。"
-				""
-				"机器能量输入受电压和电流限制，因此，一个连接到LV线路的MV机器，其输入电流为1A时，将永远不会接受超过32EU/t的功率。"
-				"仍然可以在LV线路上运行MV机器，但只有当配方功率足够低,或者如果你有一个中压电池在机器的充电槽中，机器在空闲时只会接受1A，因此电池将以最大速率32EU/t充电。"
-			]
-			icon: "gtceu:lv_transformer_1a"
-			id: "0CC922B821305906"
-			tasks: [{
-				id: "34D8E6B118290930"
-				title: "能量传输"
-				type: "checkmark"
-			}]
-			x: -1.0d
-			y: -2.5d
-		}
-		{
-			description: [
-				"传输EU是通过直接连接的导线或线缆完成的。"
-				"导线是较差的选择，因为它们会电你，并且线损比较大，所以你需要使用绝缘线缆。"
-				"线损意味着你必须将你的机器靠近你的发电机，但这只会在游戏早期成为问题。"
-				"如果你浏览任务书,你最终将能够获得超导体，绕过这个问题。"
-				"格雷科技的线缆损耗 指每个线缆块的EU包传输都会减少其存储的EU。"
-				"如锡线缆的线损为1，对于一段从基础内燃机连出的4米线缆，在末端的电压只有28EU/t，不足一般LV机器功率的30EU/t。所以，工作中的机器可能会在几秒后跳电。"
-				"但是这里无需担心，前期有便宜的超导，后面有无线"
-			]
-			icon: "gtceu:tin_single_cable"
-			id: "4A7E19EF14D3C072"
-			tasks: [{
-				id: "6C551BD24A83AB3F"
-				title: "线缆传输"
-				type: "checkmark"
-			}]
-			x: 1.0d
-			y: -2.5d
-		}
-		{
-			description: [
-				"在格雷科技中，每个小发电机产生1A其电压等级。"
-				"如果一个机器需要32EU/t，一个32EU的\"包 \"会每隔一tick发送。"
-				"一个带有4电池的LV电池箱可以产生4安培的LV(128EU/t)。"
-				"通用机器被配置为抽取2安培，其他机器有特定的安培输入，这在它们的工具提示中描述。"
-				"试图运输超过限制的安培将会烧毁你的线缆。"
-				"安培只通过线缆直接连接生产者和消费者抽取，并且只在消费者运行时抽取。"
-				"这意味着你可以在某些地方安全地降低你的电缆。"
-			]
-			icon: "gtceu:lv_diode"
-			id: "4F7A3702787F86A7"
-			tasks: [{
-				id: "007D09C6CE7CB00B"
-				title: "电流"
-				type: "checkmark"
-			}]
-			x: 3.0d
-			y: -2.5d
-		}
-		{
-			description: [
-				"超频是一种机制,当你试图在一个比配方本身更高等级的机器中运行配方时发生，配方将使用更多的能量，但配方时间将根据你超频的等级减少。"
-				"机器有一个侧面菜单来设置它将超频到的最大电压等级，点击它来循环所有可用的电压并选择一个限制。"
-				"每个高于配方等级的等级允许一个超频.每个超频意味着:"
-				"2x配方速度 "
-				"4x电力消耗"
-				"2x总能量成本"
-				"但是对于ULV配方来说(乃至2EU/t的研磨机配方)在LV机器中不会超频，所以他们到MV才会使用LV等级的电功率(研磨机配方一般得到HV才使用32EU/t)。"
-				"默认的超频一次，额定功率提升四倍，时间缩减为一半。使用的电能增加了一倍，所以这是有损超频，绝大多数机器使用的都是有损超频。"
-				"对应的有无损超频的概念，4x配方速度，4x电力消耗。"
-			]
-			icon: "minecraft:clock"
-			id: "5535934109A12B5D"
-			tasks: [{
-				id: "4DB7B7FC0312D572"
-				title: "超频"
-				type: "checkmark"
-			}]
-			x: 5.0d
-			y: -2.5d
-		}
-		{
-			description: [
-				"当然，电压之间可以通过变压器转换。普通，高电流，高能变压器只能在两个相邻的电压层之间转换。它们同时有升压和降压模式。升压模式下，电压和4x电流将被转换为高一级电压和1x电流。"
-				"变压器分为四种：普通、高电流、高能和降压变压器。普通变压器为1A<-->4A，高电流变压器为4A<-->16A，高能变压器为16A<-->64A。"
-				"ZPM阶段解锁的多方块机器有源变压器可以支持任意电压与任意电流间的相互转换，自动升压/降压，在中后期高电压高电流环境下可以替代一切普通变压器。"
-				"但真正的用途是给激光拐弯。"
-			]
-			icon: "gtceu:active_transformer"
-			id: "010CF028448C17A9"
-			tasks: [{
-				id: "311562AB006A065E"
-				title: "变压"
-				type: "checkmark"
-			}]
-			x: 7.0d
-			y: -2.5d
-		}
+			"GregTech's energy system is not nearly as simple as other tech mods' energy systems."
+			"GregTech's energy unit is EU, as opposed to FE used in other mods."
+			"EU mechanics are not similar to real-world electricity."
+			"Power = Voltage x Current"
+			"Energy = Power x Time"
+			"Resistance is a concept that is excluded in GregTech, and is instead partially modeled as cable losses."
+			"GregTech definitions are as follows:"
+			"- EU is the unit of energy."
+			"- EU/t is the power."
+			"- A (Ampere) is the current."
+			"- V (Volt) is the voltage, called LV, MV, HV... in the game because these are the gameplay-related values ​​(technically: LV = 32V = 32EU/t/A). "
+		]
+		icon: "gtceu:lv_battery_buffer_4x"
+		id: "7F97BED1B9552E5E"
+		tasks: [{
+		id: "7B797503EA800D59"
+		title: "Basic Settings"
+		type: "checkmark"
+		}]
+		x: -3.0d
+		y: -2.5d
+	}
+	{
+	dependency_requirement: "one_completed"
+	description: [
+	"In GregTech, electricity is transmitted in \"packets \". The size of each packet is equal to its voltage level."
+	"Using the LV packet as an example, this \"packet \"Will carry 32EU, multiple blocks are capable of generating these EU packets, and packets are only generated if the destination is accessible."
+	"Every tick (1/20 second), a EU \"packet\" attempts to be transferred from the energy producer to the consumer."
+	"These \"packets\" have two parameters: the voltage level (V), which is determined by the producer's level, and the current (A), which determines how much power can actually be transferred."
+	"Energy will only be transferred if a full ampere \"packet\" can be received. You may notice that your machines are just below full EU capacity - they will only accept EU if they lack at least 1A of input voltage."
+	""
+	"If a machine receives a voltage higher than its voltage level, it will explode, but any excess current will have no adverse effects as the machine only consumes it on demand."
+	""
+	"Machine explosions would normally also destroy terrain, but that feature is disabled in this pack. "
+	""
+	"In summary, energy is transferred in \"packets\" of 32EU for LV, 128EU for MV... and so on, and the actual amount of energy received by a machine may be less than what was sent due to cable losses. "
+	""
+	"Machine energy input is limited by voltage and current, so an MV machine connected to a LV line with an input current of 1A will never accept more than 32EU/t of power. "
+	"It is still possible to run MV machines on LV lines, but only if the formula power is low enough, or if you have a medium voltage battery in the machine's charge slot, the machine will only accept 1A when idle, so the battery will charge at the maximum rate of 32EU/t. "
 	]
-	title: "电力"
+	icon: "gtceu:lv_transformer_1a"
+	id: "0CC922B821305906"
+	tasks: [{
+	id: "34D8E6B118290930"
+	title: "Energy Transfer"
+	type: "checkmark"
+	}]
+	x: -1.0d
+	y: -2.5d
+	}
+	{
+	description: [
+	"Transferring EU is done via directly connected wires or cables. "
+	"Wires are a poor choice as they will electrocute you and have high cable losses, so you need to use insulated cables. "
+	"Cable losses mean you have to place your machines close to your generators, but this will only be a problem early in the game. "
+	"If you go through the quest book, you will eventually be able to get superconductors, bypassing this problem. "
+	"GregTech cable losses refer to the fact that each EU packet transferred by a cable block reduces the amount of EU it stores. "
+	"If the line loss of the tin cable is 1, for a 4-meter cable connected from a basic internal combustion engine, the voltage at the end is only 28EU/t, which is less than the 30EU/t of the power of a general LV machine. Therefore, the machine may trip after a few seconds. "
+	"But there is no need to worry here, there are cheap superconductors in the early stage, and wireless in the later stage"
+	]
+	icon: "gtceu:tin_single_cable"
+	id: "4A7E19EF14D3C072"
+	tasks: [{
+	id: "6C551BD24A83AB3F"
+	title: "Cable transmission"
+	type: "checkmark"
+	}]
+	x: 1.0d
+	y: -2.5d
+	}
+	{
+	description: [
+	"In GregTech, each small generator generates 1A of its voltage level. "
+	"If a machine requires 32EU/t, a 32EU \"pack \" will be sent every tick. "
+	"A LV battery box with 4 cells can produce 4 LV amps (128EU/t). "
+	"Generic machines are configured to draw 2 amps, other machines have specific amp inputs, which are described in their tooltips. "
+	"Trying to deliver more amps than the limit will burn your cables. "
+	"Amps are only drawn through cables directly connecting producers and consumers, and are only drawn when the consumer is running. "
+	"This means you can safely lower your cables in certain places. "
+	]
+	icon: "gtceu:lv_diode"
+	id: "4F7A3702787F86A7"
+	tasks: [{
+	id: "007D09C6CE7CB00B"
+	title: "Current"
+	type: "checkmark"
+	}]
+	x: 3.0d
+	y: -2.5d
+	}
+	{
+	description: [
+	"Overclocking is a mechanism that occurs when you attempt to run a recipe in a machine at a higher level than the recipe itself. The recipe will use more power, but the recipe time will be reduced based on the level you overclock. "
+	"The machine has a side menu to set the maximum voltage level it will overclock to, click on it to cycle through all available voltages and select a limit. "
+	"Each level above the recipe level allows one overclock. Each overclock means:"
+	"2x recipe speed"
+	"4x power consumption"
+	"2x total energy cost"
+	"However, ULV recipes (even 2EU/t grinder recipes) will not be overclocked in LV machines, so they will use LV-level power only when they reach MV (grinder recipes generally use 32EU/t only when they reach HV). "
+	"The default overclock increases the rated power fourfold and reduces the time by half. The power used is doubled, so this is a lossy overclock, and most machines use lossy overclocking. "
+	"Correspondingly, there is the concept of lossless overclocking, 4x recipe speed, 4x power consumption. "
+	]
+	icon: "minecraft:clock"
+	id: "5535934109A12B5D"
+	tasks: [{
+	id: "4DB7B7FC0312D572"
+	title: "Overclocking"
+	type: "checkmark"
+	}]
+	x: 5.0d
+	y: -2.5d
+	}
+	{
+	description: [
+	"Of course, voltages can be converted between transformers. Normal, high current, and high energy transformers can only convert between two adjacent voltage levels. They have both step-up and step-down modes. In step-up mode, voltage and 4x current will be converted to a higher voltage and 1x current. "
+	"There are four types of transformers: normal, high current, high energy, and step-down transformers. Normal transformers are 1A<-->4A, high current transformers are 4A<-->16A, and high energy transformers are 16A<-->64A. "
+	"The multi-block machine active transformer unlocked in the ZPM stage can support the conversion between any voltage and any current, automatically step up/down, and can replace all ordinary transformers in the high voltage and high current environment in the middle and late stages. "
+	"But its real use is to turn the laser. "
+	]
+	icon: "gtceu:active_transformer"
+	id: "010CF028448C17A9"
+	tasks: [{
+	id: "311562AB006A065E"
+	title: "Voltage Transformation"
+	type: "checkmark"
+	}]
+	x: 7.0d
+	y: -2.5d
+	}
+	]
+	title: "Electricity"
 }

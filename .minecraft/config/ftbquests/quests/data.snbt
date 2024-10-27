@@ -17,6 +17,6 @@
 	}
 	pause_game: false
 	progression_mode: "flexible"
-	title: "格雷科技休闲版"
+	title: "GregTech Leisure"
 	version: 13
 }
